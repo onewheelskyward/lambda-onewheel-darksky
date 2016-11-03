@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/onewheelskyward/node-onewheel-darksky#readme",
   "dependencies": {
-    "darksky-node": "0.0.2",
     "node-geocoder": "^3.15.0"
   }
 }
