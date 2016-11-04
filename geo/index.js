@@ -1,4 +1,5 @@
 var NodeGeocoder = require('node-geocoder');
+var superagent = require('superagent');
 
 exports.handler = function(event, context) {
     var geocoderOptions = {
@@ -23,17 +24,25 @@ exports.handler = function(event, context) {
         } else {
             console.log("Success block");
             console.log(res);
-            console.log(res[0].latitude);
-            var place = {
-                lat: res[0].latitude,
-                lng: res[0].longitude,
-                place: res[0].formattedAddress};
-            console.log("Returning place: " + JSON.stringify(place));
-            context.succeed({
-                statusCode: 200,
-                headers: {},
-                body: JSON.stringify(place)
-            });
+
+            var response = {
+                response_type: 'in_channel',
+                text: res[0].latitude.toFixed(7) + ", " + res[0].longitude.toFixed(7) + "\n"
+                + res[0].formattedAddress
+            };
+            console.log("Returning place: " + JSON.stringify(response));
+            superagent
+                .post(event.queryStringParameters.response_url)
+                .send(response)
+                .set('Content-type', 'application/json')
+                .end(function(err, res) {
+                    console.log("Posted successfully!");
+                    context.succeed({
+                        statusCode: 200,
+                        headers: {},
+                        body: JSON.stringify(response)
+                    });
+                });
         }
     });
 };
