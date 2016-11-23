@@ -1,5 +1,5 @@
 {
-  "name": "lambda-onewheel-darksky",
+  "name": "node-onewheel-darksky",
   "version": "0.0.0",
   "description": "A node interface to DarkSky's excellent api- returning data that can be used to present graphical representations.",
   "main": "index.js",
