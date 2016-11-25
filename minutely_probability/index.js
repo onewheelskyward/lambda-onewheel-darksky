@@ -8,11 +8,11 @@ exports.handler = function(event, context) {
         .end(function (err, forecast) {
             console.log("Forecast result: " + JSON.stringify(forecast.body));
             // Get the forecast
-            Object.keys(forecast.body.data).map((e) => console.log(`key=${e}  value=${forecast.body.data[e]}`));
+            var probabilities = forecast.body.data.map(function(minute) {return minute.precipProbability;});
             context.succeed({
                 statusCode: 200,
                 headers: {},
-                body: JSON.stringify(forecast.body)
+                body: JSON.stringify(probabilities)
             });
         });
 };
