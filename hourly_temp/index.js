@@ -4,6 +4,7 @@ exports.handler = function(event, context) {
     console.log(event.queryStringParameters);
 
     // Call the geocoder with the loc
+    console.log("Calling " + process.env.FORECAST_URI + event.queryStringParameters.loc);
     superagent.get(process.env.FORECAST_URI + event.queryStringParameters.loc)
         .end(function (err, forecast) {
             console.log("Forecast result: " + JSON.stringify(forecast.body.hourly));
