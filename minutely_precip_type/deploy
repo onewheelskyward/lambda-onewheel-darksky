@@ -1,6 +1,6 @@
 #!/usr/local/bin/fish
 
-FUNC="darksky_minutely"
+FUNC="darksky_minutely_precip_type"
 PROFILE="aklambda"
 
 rm one.zip
